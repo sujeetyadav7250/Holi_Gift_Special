@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎁 Holi Special Gift 🎉</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle, #ff0080, #ff8c00, #40e0d0, #8a2be2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+      overflow-x: hidden;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .container {
+      background: rgba(0,0,0,0.65);
+      padding: 25px 18px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(255,255,255,0.4);
+      width: 100%;
+      max-width: 420px;
+      animation: pop 1s ease;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+      font-size: clamp(26px, 5vw, 40px);
+      color: #ffd700;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: clamp(14px, 3.8vw, 18px);
+      margin-bottom: 10px;
+    }
+
+    .gift-box {
+      width: 90px;
+      height: 90px;
+      background: linear-gradient(45deg, red, gold);
+      margin: 15px auto;
+      border-radius: 12px;
+      position: relative;
+      cursor: pointer;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .gift-box::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 12px;
+      background: gold;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .gift-box::after {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 12px;
+      background: gold;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #message {
+      font-size: clamp(14px, 4vw, 20px);
+      color: #00ffea;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .photo-section {
+      margin-top: 12px;
+      display: none;
+    }
+
+    .photo-section img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 4px solid gold;
+      box-shadow: 0 0 12px gold;
+    }
+
+    .arrow {
+      font-size: 28px;
+      color: gold;
+      animation: arrowMove 1s infinite alternate;
+    }
+
+    @keyframes arrowMove {
+      from { transform: translateY(0); }
+      to { transform: translateY(8px); }
+    }
+
+    .colors span {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      animation: fly 6s linear infinite;
+      background: hsl(calc(360 * var(--i)), 100%, 50%);
+    }
+
+    @keyframes fly {
+      from { transform: translateY(110vh) scale(0); }
+      to { transform: translateY(-10vh) scale(1.5); }
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        padding: 35px 30px;
+        max-width: 480px;
+      }
+
+      .gift-box {
+        width: 110px;
+        height: 110px;
+      }
+
+      .photo-section img {
+        width: 110px;
+        height: 110px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>🎉 Happy Holi 🎉</h1>
+    <p>Click the Gift Box to open your surprise 🎁</p>
+
+    <div class="gift-box" onclick="openGift()"></div>
+
+    <div id="message"></div>
+
+    <div class="photo-section" id="photoBox">
+      <div class="arrow">⬇️</div>
+      <img src="sujeet yadav.jpeg" alt="Sujeet Yadav">
+      <p>💖 From Your Friend 💖</p>
+    </div>
+  </div>
+
+  <div class="colors"></div>
+
+  <audio id="music" loop>
+    <source src="Holisong.mp4" type="audio/mp3">
+  </audio>
+
+  <script>
+    const music = document.getElementById("music");
+
+    function openGift() {
+      music.play();
+
+      document.getElementById("message").innerHTML =
+        "🌈 May your life be filled with joy, success & endless colors! 💖<br>Happy Holi All My Dear Friends 🎉";
+
+      document.getElementById("photoBox").style.display = "block";
+
+      for (let i = 0; i < 150; i++) {
+        let span = document.createElement("span");
+        span.style.setProperty('--i', Math.random());
+        span.style.left = Math.random() * 100 + "vw";
+        span.style.animationDuration = (3 + Math.random() * 4) + "s";
+        document.querySelector('.colors').appendChild(span);
+      }
+    }
+  </script>
+
+</body>
+</html>
